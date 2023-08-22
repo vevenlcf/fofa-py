@@ -358,6 +358,7 @@ class Client:
 
         def make_request():
             headers = {"Accept-Encoding": "gzip"}
+            self._session.trust_env = False # 处理系统如果挂代理情况下，导致失败的情况
             response = self._session.request(url=u, method=method, data=data, params=req_param, headers=headers)
             if response.status_code != 200:
                 raise Exception("Request failed with status code: {}".format(response.status_code))
